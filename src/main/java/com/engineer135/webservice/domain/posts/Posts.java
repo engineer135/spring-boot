@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.engineer135.webservice.domain.BaseTimeEntity;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +16,7 @@ import lombok.NoArgsConstructor;
 //Entity 클래스를 프로젝트 코드상에서 기본생성자로 생성하는 것은 막되, JPA에서 Entity 클래스를 생성하는 것을 허용하기 위해 추가합니다.
 @Getter // 롬복. 모든 필드의 getter 메소드를 자동 생성!! 두둥!!
 @Entity // 테이블과 링크될 클래스임을 명시. 언더스코어 네이밍으로 이름 매칭. myTable > my_table
-public class Posts {
+public class Posts extends BaseTimeEntity {
 	
 	@Id // 해당 테이블의 PK 필드
 	@GeneratedValue // PK 생성규칙. 기본값은 auto, mysql의 auto_increment와 동일.

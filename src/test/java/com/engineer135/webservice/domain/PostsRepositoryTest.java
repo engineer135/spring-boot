@@ -2,7 +2,9 @@ package com.engineer135.webservice.domain;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.After;
@@ -46,5 +48,24 @@ public class PostsRepositoryTest {
 		assertThat(posts.getContent(), is("테스트 내용"));
 		
 		//then
+	}
+	
+	@Test
+	public void BaseTimeEntityInsert() {
+		//given
+		LocalDateTime now = LocalDateTime.now();
+		postsRepository.save(Posts.builder()
+				.title("테스트 제목")
+				.content("테스트 내용")
+				.author("테스트글쓴이")
+				.build()
+				);
+		//when
+		List<Posts> postsList = postsRepository.findAll();
+		
+		//then
+		Posts posts = postsList.get(0);
+		assertTrue(posts.getCreatedDate().isAfter(now));
+		assertTrue(posts.getModifiedDate().isAfter(now));
 	}
 }
