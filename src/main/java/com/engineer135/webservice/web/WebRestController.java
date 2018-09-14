@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.engineer135.webservice.domain.posts.PostsRepository;
 import com.engineer135.webservice.domain.posts.PostsSaveRequestDto;
+import com.engineer135.webservice.service.PostsService;
 
 import lombok.AllArgsConstructor;
 
@@ -23,6 +24,8 @@ public class WebRestController {
     }*/
 	private PostsRepository postsRepository;
 	
+	private PostsService postsService;
+	
 	@GetMapping("/hello")
 	public String hello() {
 		// 와 엄청 간단하네...
@@ -30,7 +33,9 @@ public class WebRestController {
 	}
 	
 	@PostMapping("/posts")
-	public void savePosts(@RequestBody PostsSaveRequestDto dto) {
-		postsRepository.save(dto.toEntity());
+	public Long savePosts(@RequestBody PostsSaveRequestDto dto) {
+		//postsRepository.save(dto.toEntity());
+		return postsService.save(dto); // insert 로직을 서비스문으로 옮김.
+				
 	}
 }

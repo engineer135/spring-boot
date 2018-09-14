@@ -1,4 +1,17 @@
 spring:
+  profiles: #어플리케이션 실행시 파라미터로 넘어온게 없으면 active값을 보게됨. 운영환경에선 real 혹은 production같은 profile을 보도록 jar 실행시점에 파라미터를 변경한다.
+    active: local # 기본환경선택
+    
+# local 환경
+---
+spring:
+  profiles: local
+  datasource:
+    data: classpath:data-h2.sql #시작할때 실행시킬 script
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop #모든 테이블이 drop -> create됨
   h2:
     console:
       enabled: true

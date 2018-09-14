@@ -3,6 +3,7 @@ package com.engineer135.webservice.domain.posts;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.engineer135.webservice.domain.BaseTimeEntity;
@@ -19,7 +20,8 @@ import lombok.NoArgsConstructor;
 public class Posts extends BaseTimeEntity {
 	
 	@Id // 해당 테이블의 PK 필드
-	@GeneratedValue // PK 생성규칙. 기본값은 auto, mysql의 auto_increment와 동일.
+	@GeneratedValue(strategy=GenerationType.IDENTITY)// PK 생성규칙. 기본값은 auto, mysql의 auto_increment와 동일.
+	// 부트스트랩 2.0 이후부터 default 상태에서는 auto_increment 적용이 안돼서 strategy=GenerationType.IDENTITY를 추가했다.
 	private Long id;
 	
 	@Column(length=500, nullable=false) // 컬럼 어노테이션은, 기본값 외에 추가로 필요한 옵션 있을때만 사용. 기본적으로 필드들은 모두 컬럼임.
